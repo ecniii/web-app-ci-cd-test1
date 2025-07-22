@@ -21,5 +21,5 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add k8s/deployment.yaml
-          git commit -m "Update deployment image to latest"
-          git push
+          git commit -m "Update deployment image to latest" || echo "No changes to commit"
+          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/ecniii/web-app-ci-cd-test1.git HEAD:main
