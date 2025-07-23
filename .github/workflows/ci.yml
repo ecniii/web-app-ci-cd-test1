@@ -1,24 +1,28 @@
-name: Build and Push to GHCR
+name: Build, Push, and Update Deployment
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
+    paths:
+      - '**.js'
+      - 'Dockerfile'
+      - 'k8s/deployment.yaml'
+
+permissions:
+  contents: write  # Required to push changes back to the repo
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+
+    env:
+      IMAGE_TAG: ghcr.io/${{ github.repository_owner }}/hello-app:latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to GHCR
+      - name: Log in to GitHub Container Registry (GHCR)
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -26,8 +30,20 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: ghcr.io/${{ github.repository_owner }}/hello-app:latest
+        run: |
+          docker build -t $IMAGE_TAG .
+          docker push $IMAGE_TAG
+
+      - name: Update image tag in deployment.yaml
+        run: |
+          sed -i 's|image: .*|image: '"$IMAGE_TAG"'|' k8s/deployment.yaml
+
+      - name: Commit and push updated deployment.yaml
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          git config user.name "ecniii"
+          git config user.email "nabor.ecn@gmail.com"
+          git add k8s/deployment.yaml
+          git commit -m "Update deployment image to latest" || echo "No changes to commit"
+          git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git HEAD:main
