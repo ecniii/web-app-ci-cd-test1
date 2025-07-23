@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hello-app
-        image: ghcr.io/ecniii/hello-app:5d9693df8f5f6863a713846616c8083e0f4bcad5
+        image: ghcr.io/ecniii/hello-app:733ec8830a42f134bbe81f5f374517243cd66775
         ports:
         - containerPort: 3000
 ---
