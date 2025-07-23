@@ -1,4 +1,4 @@
-name: Update Deployment Manifest
+name: Update Deployment Manifest (K8s)
 
 on:
   workflow_run:
