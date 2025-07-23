@@ -28,6 +28,7 @@ http.createServer((_, res) => {
         .menu {
           display: flex;
           gap: 2rem;
+          flex-wrap: wrap;
         }
         .menu a {
           color: #fff;
@@ -56,11 +57,17 @@ http.createServer((_, res) => {
         <div class="menu">
           <a href="#">Home</a>
           <a href="#">Products</a>
+          <a href="#">Categories</a>
+          <a href="#">Deals</a>
+          <a href="#">New Arrivals</a>
+          <a href="#">Best Sellers</a>
           <a href="#">Cart</a>
+          <a href="#">Orders</a>
+          <a href="#">Account</a>
           <a href="#">Contact</a>
         </div>
       </nav>
-      <div class="message">ECN3 Web Application</div>
+      <div class="message">Systems Team Web Application</div>
     </body>
     </html>
   `);
