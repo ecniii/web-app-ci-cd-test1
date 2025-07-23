@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: hello-app
-        image: ghcr.io/ecniii/hello-app:build-21
+        image: ghcr.io/ecniii/hello-app:build-22
         ports:
         - containerPort: 3000
 ---
