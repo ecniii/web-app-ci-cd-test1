@@ -60,7 +60,7 @@ http.createServer((_, res) => {
           <a href="#">Contact</a>
         </div>
       </nav>
-      <div class="message">Hello from Kubernetes!</div>
+      <div class="message">ECN3 Web Application</div>
     </body>
     </html>
   `);
