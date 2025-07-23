@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      IMAGE_TAG: ghcr.io/${{ github.repository_owner }}/hello-app:v1.5
+      IMAGE_TAG: ghcr.io/${{ github.repository_owner }}/hello-app:v1.6
 
     steps:
       - name: Checkout code
