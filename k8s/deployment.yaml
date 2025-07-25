@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: ghcr.io/ecniii/hello-app:build-33
+        image: ghcr.io/ecniii/hello-app:build-34
         ports:
         - containerPort: 5000
         livenessProbe:
